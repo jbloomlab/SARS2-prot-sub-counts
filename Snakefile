@@ -11,6 +11,7 @@ rule all:
     """Target rule."""
     input:
         sub_counts_csv="results/sub_counts/sub_counts.csv",
+        ref_prots="results/ref/prots.fa",
 
 
 rule get_mat_tree:
@@ -69,3 +70,14 @@ rule get_sub_counts:
         sub_counts_csv="results/sub_counts/sub_counts.csv",
     script:
         "scripts/get_sub_counts.py"
+
+
+rule get_ref_prots:
+    """Get sequence of proteins in reference."""
+    input:
+        ref_fasta=rules.get_ref_fasta.output.ref_fasta,
+        ref_gtf=rules.get_ref_gtf.output.ref_gtf,
+    output:
+        ref_prots="results/ref/prots.fa",
+    script:
+        "scripts/get_ref_prots.py"
