@@ -1,0 +1,7 @@
+# matutils pre-built mutation-annotated tree from August-14-2022 taken from
+# http://hgdownload.soe.ucsc.edu/goldenPath/wuhCor1/UShER_SARS-CoV-2/
+mat_tree: http://hgdownload.soe.ucsc.edu/goldenPath/wuhCor1/UShER_SARS-CoV-2/2022/08/14/public-2022-08-14.all.masked.nextclade.pangolin.pb.gz
+
+# Reference GTF and FASTA, and location of spike coding sequence
+ref_fasta: http://hgdownload.soe.ucsc.edu/goldenPath/wuhCor1/bigZips/wuhCor1.fa.gz
+ref_gtf: http://hgdownload.soe.ucsc.edu/goldenPath/wuhCor1/bigZips/genes/ncbiGenes.gtf.gz
