@@ -10,8 +10,7 @@ configfile: "config.yaml"
 rule all:
     """Target rule."""
     input:
-        sub_counts_csv="results/sub_counts/sub_counts.csv",
-        ref_prots="results/ref/prots.fa",
+        "results/sub_counts_plots",
 
 
 rule get_mat_tree:
@@ -81,3 +80,16 @@ rule get_ref_prots:
         ref_prots="results/ref/prots.fa",
     script:
         "scripts/get_ref_prots.py"
+
+
+rule plot_sub_counts:
+    """Plot counts of amino-acid substitutions."""
+    input:
+        sub_counts_csv=rules.get_sub_counts.output.sub_counts_csv,
+        ref_prots=rules.get_ref_prots.output.ref_prots,
+    output:
+        sub_count_plotsdir=directory("results/sub_counts_plots"),
+    log:
+        notebook="results/logs/plot_sub_counts.ipynb",
+    notebook:
+        "notebooks/plot_sub_counts.py.ipynb"

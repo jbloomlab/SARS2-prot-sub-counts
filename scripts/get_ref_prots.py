@@ -39,8 +39,10 @@ prot_coords = (
     .assign(
         nt_sequence=lambda x: x.apply(lambda r: ref[r["start"] - 1: r["end"]], axis=1),
     )
-    .groupby(["protein", "start", "end"], as_index=False)
-    .aggregate(nt_sequence=pd.NamedAgg("nt_sequence", lambda s: "".join(s.values)))
+    .groupby(["protein"], as_index=False)
+    .aggregate(
+        nt_sequence=pd.NamedAgg("nt_sequence", lambda s: "".join(s.values)),
+    )
     .assign(
         prot_sequence=lambda x: x["nt_sequence"].map(
             lambda s: str(Bio.Seq.Seq(s).translate()),
@@ -51,6 +53,8 @@ prot_coords = (
 with open(snakemake.output.ref_prots, "w") as f:
     for tup in prot_coords.itertuples():
         prot = tup.prot_sequence
-        assert len(prot) == (tup.end - tup.start + 1) / 3
+        assert "*" not in prot
+        assert "-" not in prot
+        assert "X" not in prot
         print(f"Writing {tup.protein} of length {len(prot)}")
         f.write(f">{tup.protein}\n{prot}\n")
