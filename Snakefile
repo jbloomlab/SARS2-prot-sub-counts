@@ -10,6 +10,8 @@ configfile: "config.yaml"
 rule all:
     """Target rule."""
     input:
+        "results/sub_counts/sub_counts.csv",
+        "results/ref/prots.fa",
         "results/sub_counts_plots",
 
 
