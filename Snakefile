@@ -13,6 +13,7 @@ rule all:
         "results/sub_counts/sub_counts.csv",
         "results/ref/prots.fa",
         "results/sub_counts_plots",
+        "docs/_includes/vega_plots.html"
 
 
 rule get_mat_tree:
@@ -91,6 +92,7 @@ rule plot_sub_counts:
         ref_prots=rules.get_ref_prots.output.ref_prots,
     output:
         sub_count_plotsdir=directory("results/sub_counts_plots"),
+        sub_count_plots_concat="docs/_includes/vega_plots.html"
     log:
         notebook="results/logs/plot_sub_counts.ipynb",
     notebook:
