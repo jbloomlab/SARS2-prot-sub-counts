@@ -16,6 +16,7 @@ Nonetheless, these counts should be a good measure of mutational tolerance.
 Here are interactive plots for each SARS-CoV-2 protein.
 You can mouse over points for statistics and use the zoom bar to zoom into specific sites.
 
+{% include vega_plots.html %}
 
 ## Data and code
 The code used to obtain the counts and generate this site are [on GitHub](https://github.com/jbloomlab{{ site.baseurl }}).
