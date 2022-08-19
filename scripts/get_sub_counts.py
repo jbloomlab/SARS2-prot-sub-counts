@@ -15,7 +15,9 @@ sub_counts = (
         protein=lambda x: x["aa_mutations"].str.split(":").str[0],
         substitution=lambda x: x["aa_mutations"].str.split(":").str[1],
         site=lambda x: x["substitution"].str[1: -1].astype(int),
+        is_synonymous=lambda x: x["substitution"].str[0] == x["substitution"].str[-1],
     )
+    .query("not is_synonymous")
     .sort_values(["protein", "site"])
     .drop(columns="aa_mutations")
     [["protein", "site", "substitution", "count"]]
